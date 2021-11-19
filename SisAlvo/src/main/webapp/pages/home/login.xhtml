@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+<h:head>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html; charset=UTF-8"/>
+	<h:outputStylesheet
+		name="my_style.css"
+		library="css" />
+	<link
+		rel="icon"
+		type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/images/iconeAlvo.ico" />
+	<title>Sistema Gestão Alvo</title>
+</h:head>
+<!-- 	<f:loadBundle basename="br.com.agencia1615.sisalvo.properties.labels" var="lbl"/> -->
+<h:body>
+	<div class="alinhamentoCenter">
+		<h:graphicImage
+				style="margin-top: 3em;"
+				value="/resources/logos/logoAlvo.png"
+				height="221px"
+				width="500px" />
+
+		<h:form id="formLogin">
+			<p:growl
+					id="growl-mensagem"
+					showDetail="true"
+					sticky="true" />
+			<div class="labelLogin">
+				<p:outputLabel value="#{msg.CGF001}"/>
+			</div>
+	      		<p:inputText toggleMask="true" size="23" style="margin-bottom: 0.5em;" id="idLogin" value="#{usuarioController.usuarioModel.login}"/>
+	      	<br></br>
+	      	<div class="labelLogin">
+				<p:outputLabel value="#{msg.CGF002}"/>
+			</div>
+      		<p:password toggleMask="true" id="idSenha" value="#{usuarioController.usuarioModel.senha}" />
+      		<h:message
+					class="error"
+					for="loginOuSenhaError"
+					id="idLoginOuSenhaErrados"></h:message>
+      		<br></br>
+			<p:commandButton update="growl-mensagem"
+					style="margin-top: 1em;"
+					value="#{msg.CGB001}"
+					action="#{usuarioController.efetuarLogin}">
+<!-- 					<p:ajax event="click" update=":formLogin"></p:ajax> -->
+					</p:commandButton>
+			<p:commandButton update="growl-mensagem"
+					style="margin-top: 1em;"
+					value="SalvarTeste"
+					action="#{usuarioController.salvarTeste}">
+<!-- 					<p:ajax event="click" update=":formLogin"></p:ajax> -->
+					</p:commandButton>
+
+			<p:messages showDetail="true" />
+
+			<div class="card" style="margin-top: 1em;">
+					<p:link
+						value="#{msg.CGB008}"
+						outcome="/pages/seguranca/recuperarSenha.xhtml">
+						<f:param
+							name="productId"
+							value="5" />
+					</p:link>
+			</div>
+		</h:form>
+	</div>
+</h:body>
+</html>

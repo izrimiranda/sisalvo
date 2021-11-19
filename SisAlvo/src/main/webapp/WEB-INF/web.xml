@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:web="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	version="4.0" >
+
+ 	<!-- Titulo do aplicativo -->
+  	<context-param>
+    	   <param-name>Sistema de Gestão Alvo</param-name>
+    	   <param-value>Sistema de Gestão Alvo</param-value>
+  	</context-param>
+
+  	<!--Pagina inicial -->
+ 	<welcome-file-list>
+    	   <welcome-file>index.html</welcome-file>
+  	</welcome-file-list>
+
+  	<filter>
+	    <filter-name>AutenticacaoFilter</filter-name>
+	    <filter-class>br.com.agencia1615.sisalvo.filters.AutenticacaoFilter</filter-class>
+  	</filter>
+
+  	<filter-mapping>
+	    <filter-name>AutenticacaoFilter</filter-name>
+	    <url-pattern>/pages/sistema/*</url-pattern>
+	</filter-mapping>
+
+  	<!-- Configuracoes do JSF/Facelets -->
+  	<context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    	  <param-value>.xhtml</param-value>
+  	</context-param>
+
+	<context-param>
+       <param-name>javax.faces.CONFIG_FILES</param-name>
+    	 <param-value>/WEB-INF/xml/faces-config.xml</param-value>
+  	</context-param>
+  	 <!-- Fim de configuracoes do JSF/Facelets -->
+
+	<!-- Configuracoes do FacesServlet -->
+  	<servlet>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <servlet-class>br.com.agencia1615.sisalvo.filters.JPAFilter</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  	</servlet>
+  	<servlet>
+    	   <servlet-name>Faces Servlet</servlet-name>
+    	   <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    	   <load-on-startup>1</load-on-startup>
+  	</servlet>
+
+  	<servlet-mapping>
+    	  <servlet-name>Faces Servlet</servlet-name>
+    	  <url-pattern>*.faces</url-pattern>
+  	</servlet-mapping>
+  	<!-- Fim de configuracoes do FacesServlet -->
+
+  	<context-param>
+		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+		<!-- desenvolvimento 0 milissegundo.-->
+		<param-value>0</param-value>
+		<!-- producao desligado.
+		<param-value>-1</param-value> 	-->
+  	</context-param>
+  	<!-- omitido o param javax.faces.PROJECT_STAGE
+  		assumindo o default (Production) que servirah, tambem, para o
+  		desenvolvimento, desabilitando algumas msgs de erro.-->
+
+  	<!-- forcando a limpeza do cache -->
+  	<context-param>
+		<param-name>com.sun.faces.defaultResourceMaxAge</param-name>
+		<!-- desenvolvimento 1 milissegundo.-->
+		<param-value>1</param-value>
+		<!-- producao 6 weeks.
+		<param-value>3628800000</param-value>  -->
+	</context-param>
+
+  	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+  	</context-param>
+  	<!--Fim de Configuracoes do JSF/Facelets -->
+  	<session-config>
+      <session-timeout>30</session-timeout>
+  	</session-config>
+
+  	<context-param>
+	    <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+	    <param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+	   <param-name>facelets.SKIP_COMMENTS</param-name>
+	   <param-value>true</param-value>
+	</context-param>
+</web-app>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+  <!-- Database connection settings -->
+  <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="connection.url">jdbc:mysql://localhost:3306/db_sisalvo</property>
+  <property name="connection.username">izrimiranda</property>
+  <property name="connection.password">root</property>
+
+  <!-- JDBC connection pool (use the built-in) -->
+  <property name="connection.pool_size">1</property>
+
+  <!-- SQL dialect -->
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+  <!-- Enable Hibernate's automatic session context management -->
+  <property name="current_session_context_class">thread</property>
+
+  <!-- Disable the second-level cache  -->
+  <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+  <!-- Echo all executed SQL to stdout -->
+  <property name="show_sql">false</property>
+
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Aluno" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Calendario" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Campanha" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Curso" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.DiarioAvaliacao" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.DiarioPresenca" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Disciplina" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Endereco" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Financeiro" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.FinanceiroAluno" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.HistoricoContatoLead" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Leads" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.ParcelasFinanceiro" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.ParcelasFinanceiroAluno" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Professor" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Turma" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Usuario" />
+
+</session-factory>
+
+</hibernate-configuration>

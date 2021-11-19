@@ -1,0 +1,92 @@
+.alinhamentoCenter{
+	margin-top: -3em;
+	text-align: center;
+	display: block;
+	justify-content: left;
+}
+
+.alinhamentFormCenter{
+	justify-content: left;
+	display: block;
+}
+
+.alinhamentoEsquerda{
+	text-align: left;
+}
+
+/*TELA DE PRINCIPAL*/
+.alinhamentoRodaPe {
+	vertical-align: bottom;
+	text-align: center;
+	justify-content: left;
+	margin-top: 5em;
+}
+
+.menuMargemTop{
+	margin-top: 1.5em;
+}
+
+.ui-menubar,.ui-menu-child,.ui-menu {
+    background: #00b5c0 !important;
+}
+
+.affaires .ui-menuitem-text{
+	color:white;
+	font-weight: bold;
+}
+
+.meuIcone {
+	width: 120px;
+	height: 53px;
+	background-image: url("#{resource['css/icones/logoAlvoMenuBranca.png']}") !important;
+	background-size: 120px;
+}
+
+.labelLogin{
+	color: gray;
+}
+
+/*PÁGINA RECUPERAR SENHA*/
+.texto{
+	padding-bottom: 40px;
+}
+
+/*PÁGINA HOME*/
+.textoRodaPe{
+	font-size: 5px;
+}
+
+/*HEADER ALUNO*/
+.myMenu {
+	margin-left: 80%;
+}
+
+/*PÁGINA DISCIPLINA*/
+.pesquisarDisciplina{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.textoLabel{
+	font-size: 1px;
+	font-weight: bold;
+	margin-top: 10em;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+	width: 210px !important;
+}
+
+.centralizarHeader{
+	text-align: center;
+}
+
+.ui-menuitem-icon {
+	display: inline-block;
+	float: left;
+}
+
+td.centeredColumnContent{
+    text-align: center;
+}
+

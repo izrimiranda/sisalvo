@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+<h:head>
+		<meta http-equiv="refresh" content="5;url=login.faces"/>
+		<meta http-equiv="pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache"/>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html; charset=UTF-8"/>
+	<h:outputStylesheet
+		name="my_style.css"
+		library="css" />
+	<link
+		rel="icon"
+		type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/images/iconeAlvo.ico" />
+	<title>Sistema de Gestão Alvo</title>
+</h:head>
+<!-- 	<f:loadBundle basename="br.com.agencia1615.sisalvo.properties.labels" var="lbl"/> -->
+<h:body>
+	<div class="alinhamentoCenter">
+		<h:graphicImage
+				style="margin-top: 3em;"
+				value="/resources/logos/logoAlvo.png"
+				height="221px"
+				width="500px" />
+
+		<p:outputLabel value="#{msg.SES001}"/>
+	</div>
+</h:body>
+</h:html>

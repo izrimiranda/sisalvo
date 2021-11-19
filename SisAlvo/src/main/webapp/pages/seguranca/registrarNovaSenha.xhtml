@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html" />
+	<h:outputStylesheet
+		name="my_style.css"
+		library="css" />
+	<link
+		rel="icon"
+		type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/images/iconeAlvo.ico" />
+	<title>Sistema de Gestão Alvo</title>
+</h:head>
+<!-- 	<f:loadBundle basename="br.com.agencia1615.sisalvo.properties.labels" var="lbl"/> -->
+	<h:body>
+		<div class="alinhamentoCenter">
+			<h:graphicImage
+				style="margin-top: 3em;"
+				value="/resources/logos/logoAlvo.png"
+				height="221px"
+				width="500px" />
+
+			<div class="card">
+				<div class="alinhamentoCenter">
+					<h:form id="idFormNovaSenha">
+						<div class="labelLogin">
+					        <p:outputLabel styleClass="p-d-block" value="#{msg.CGF002}"/>
+						</div>
+				        <p:password id="idSenha" toggleMask="true" redisplay="true" size="20" value="#{recuperarSenhaController.recuperarSenhaModel.senha}"/>
+				        <br></br>
+				        <div class="labelLogin">
+					        <p:outputLabel styleClass="p-d-block" value="#{msg.CGF003}"/>
+						</div>
+				        <p:password id="toggle" toggleMask="true" redisplay="true" value="#{recuperarSenhaController.recuperarSenhaModel.novaSenha}"/>
+				        <br></br>
+				        <p:commandButton style="margin-top: 1em;" value="#{msg.CGB002}" action="#{recuperarSenhaController.salvarNovaSenha}"/>
+					</h:form>
+			    </div>
+			</div>
+		</div>
+	</h:body>
+</html>

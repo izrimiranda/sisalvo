@@ -1,0 +1,69 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card">
+	    <h:form>
+	        <p:growl id="messages"/>
+
+	        <p:menubar styleClass="affaires" >
+				<p:menuitem icon="meuIcone"/>
+		            <p:submenu style="margin-top: 1.5em; color: white;" label="#{msg.mm_keyLabel_cursos}" icon="pi pi-fw pi-file">
+		                <p:submenu label="#{msg.mm_keyLabel_curso}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarCurso}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarCurso}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		                <p:submenu label="#{msg.mm_keyLabel_disciplinas}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarDisciplina}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarDisicplina}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		                <p:submenu label="#{msg.mm_keyLabel_turmas}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarTurmas}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarTurmas}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		            </p:submenu>
+
+		            <p:submenu style="margin-top: 1.5em;" label="#{msg.mm_keyLabel_financeiro}" icon="pi pi-fw pi-pencil">
+		                <p:submenu label="#{msg.mm_keyLabel_entradas}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarEntrada}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarEntrada}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		                <p:submenu label="#{msg.mm_keyLabel_saidas}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarSaida}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarSaida}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		                <p:menuitem value="#{msg.mm_keyLabel_relatorios}" icon="pi pi-fw pi-align-center"/>
+		            </p:submenu>
+
+		            <p:submenu style="margin-top: 1.5em;" label="#{msg.mm_keyLabel_pedagogico}" icon="pi pi-fw pi-user">
+		                <p:submenu label="#{msg.mm_keyLabel_saidas}" icon="pi pi-fw pi-plus">
+		                    <p:menuitem value="#{msg.mm_keyLabel_cadastrarSaida}" icon="pi pi-fw pi-bookmark"/>
+		                    <p:menuitem value="#{msg.mm_keyLabel_pesquisarSaida}" icon="pi pi-fw pi-video"/>
+		                </p:submenu>
+		            </p:submenu>
+
+		            <p:submenu style="margin-top: 1.5em;" label="#{msg.mm_keyLabel_sistema}" icon="pi pi-fw pi-calendar">
+		                <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
+		                    <p:menuitem value="Save" icon="pi pi-fw pi-calendar-plus"/>
+		                    <p:menuitem value="Delete" icon="pi pi-fw pi-calendar-minus"/>
+		                </p:submenu>
+		            </p:submenu>
+
+		            <p:menuitem actionListener="#{usuarioController.setPopUpConfirmarLogout}"
+		            			style="margin-top: 1.5em;"
+		            			value="#{msg.CGF025}"
+		            			icon="pi pi-fw pi-power-off">
+		            </p:menuitem>
+	        </p:menubar>
+	    </h:form>
+	</div>
+
+	<p:confirmDialog widgetVar="botaoConfirmar" message="#{msg.MPF006}">
+		<p:commandButton style="align-content: right;" value="Sim" oncomplete="PF('botaoConfirmar').hide();"
+						action="#{usuarioController.doLogout}" />
+		<p:commandButton value="Não" onclick="PF('botaoConfirmar').hide();"/>
+	</p:confirmDialog>
+
+</ui:fragment>

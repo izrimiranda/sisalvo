@@ -1,0 +1,35 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card">
+	    <h:form>
+	        <p:growl id="messages"/>
+
+	        <p:menubar style="margin: auto;" styleClass="affaires" >
+				<p:menuitem icon="meuIcone"/>
+	            <p:submenu style="margin-top: 1.5em; color: white;" label="#{msg.mm_keyLabel_aluno}" icon="pi pi-user">
+	                    <p:submenu label="#{msg.mm_keyLabel_disciplinas}" icon="pi pi-book">
+		                    <p:menuitem value="#{msg.mm_keyLabel_consultarNotas}" icon="pi pi-check-square" url="disciplinas/disciplinas.faces"/>
+		                    <p:menuitem  value="#{msg.mm_keyLabel_consultarPresenca}" icon="pi pi-calendar" url="disciplinas/disciplinasPresenca.faces"/>
+	                    </p:submenu>
+	            </p:submenu>
+	            <p:submenu label="#{homeController.nomeUsuario}" >
+	            	<p:menuitem actionListener="#{usuarioController.setPopUpConfirmarLogout}"
+	            			value="#{msg.CGF025}"
+	            			icon="pi pi-fw pi-power-off">
+		            </p:menuitem>
+	            </p:submenu>
+	        </p:menubar>
+	    </h:form>
+	</div>
+
+	<p:confirmDialog widgetVar="botaoConfirmar" message="#{msg.MPF006}">
+		<p:commandButton value="Sim" oncomplete="PF('botaoConfirmar').hide();"
+						action="#{usuarioController.doLogout}" />
+		<p:commandButton value="Não" onclick="PF('botaoConfirmar').hide();"/>
+	</p:confirmDialog>
+
+</ui:fragment>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html" />
+	<h:outputStylesheet
+		name="my_style.css"
+		library="css" />
+	<link
+		rel="icon"
+		type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/images/iconeAlvo.ico" />
+		<title>Disciplina - Sistema Gestão Alvo</title>
+</h:head>
+	<ui:fragment rendered="#{homeController.menuHeader eq 1}">
+        <ui:include src="/pages/layout/headerPrincipal.xhtml"/>
+   	</ui:fragment>
+    <ui:fragment rendered="#{homeController.menuHeader eq '4'}">
+        <ui:include src="/pages/layout/headerAluno.xhtml"/>
+    </ui:fragment>
+
+	<div class="card">
+	    <h:form id="form">
+		    <div class="pesquisarDisciplina">
+			    <div class="ui-fluid p-formgrid p-grid">
+			    	<div class="p-field p-col-12 p-md-4">
+			    		<div class="textoLabel">
+			                <p:outputLabel style="margin-left: 1em;"
+			               				   for="@next"
+			                			   value="#{msg.mm_keyLabel_turma}"/>
+			    		</div>
+		                <p:selectOneMenu style="width: 30%; margin-left: 5em; margin-top: -3em;"
+		                				 id="group"
+		                				 value="#{disciplinaController.nomeTurma}"
+		                				 effect="fold"
+		                				 process="@this"
+		                				 onchange="window.location.reload();">
+		                	<p:ajax listener="#{disciplinaController.onChangeTurma}"/>
+		                    <f:selectItem itemLabel="#{msg.mm_keyLabel_selecioneTurma}" itemValue=""/>
+		                    <f:selectItems value="#{disciplinaController.nomeTurmas}"/>
+		                </p:selectOneMenu>
+		           	</div>
+			    </div>
+		    </div>
+	        <p:dataTable id="idDisciplina"
+	        			 var="disciplina"
+	        			 value="#{disciplinaController.listaDisciplina}"
+	        			 rowKey="#{disciplina.id}"
+	                     selection="#{disciplinaController.disciplinaSelecionada}" selectionMode="single">
+	            <f:facet name="header">
+		            <div class="textoLabel">
+	    	            <p:outputLabel value="#{msg.MPF010}"></p:outputLabel>
+		            </div>
+	            </f:facet>
+				<!-- Nome da Disciplina -->
+	            <p:column headerText="#{msg.CGF015}">
+	                <h:outputText value="#{disciplina.nomeDisciplina}" />
+	            </p:column>
+	            <!-- Sigla -->
+	            <p:column headerText="#{msg.CGF016}">
+	                <h:outputText value="#{disciplina.siglaDisciplina}" />
+	            </p:column>
+				<!-- Curso -->
+	            <p:column headerText="#{msg.CGF019}">
+	                <h:outputText value="#{disciplina.curso.nomeCurso}" />
+	            </p:column>
+	             <!-- Turma -->
+	            <p:column headerText="#{msg.CGF027}">
+	                <h:outputText value="#{disciplina.turma.nomeTurma}" />
+	            </p:column>
+	            <!-- Série -->
+	            <p:column headerText="#{msg.CGF020}">
+	                <h:outputText value="#{disciplina.serie}" />
+	            </p:column>
+	            <!-- Professor -->
+	            <p:column headerText="#{msg.CGF017}">
+	                <h:outputText value="#{disciplina.professor.nomeCompleto}" />
+	            </p:column>
+	            <!-- Ementa -->
+	            <p:column headerText="#{msg.CGF026}">
+	                <h:outputText value="Ementa Download" />
+	            </p:column>
+	        </p:dataTable>
+
+	        <p:contextMenu for="idDisciplina">
+	            <p:menuitem value="#{msg.CGF028}" update="disciplinaDetail" icon="pi pi-search"
+	                        oncomplete="PF('disciplinaDialog').show()"/>
+	        </p:contextMenu>
+
+	        <p:dialog header="#{msg.mm_keyLabel_notas}" widgetVar="disciplinaDialog" modal="true" showEffect="fade"
+	                  hideEffect="fade" resizable="false">
+	            <p:outputPanel id="disciplinaDetail" style="text-align:center;">
+	                <p:dataTable id="idDisciplina"
+	        			 var="disciplina"
+	        			 value="#{disciplinaController.listaDisciplina}"
+	        			 rowKey="#{disciplina.id}"
+	                     selection="#{disciplinaController.disciplinaSelecionada}" selectionMode="single">
+	            <f:facet name="header">
+		            <div class="textoLabel">
+	    	            <p:outputLabel value="#{msg.MPF010}"></p:outputLabel>
+		            </div>
+	            </f:facet>
+				<!-- Nome da Disciplina -->
+	            <p:column headerText="#{msg.CGF015}">
+	                <h:outputText value="#{disciplina.nomeDisciplina}" />
+	            </p:column>
+	            </p:outputPanel>
+	        </p:dialog>
+	    </h:form>
+	</div>
+	<div class="alinhamentoRodaPe">
+		<ui:include src="/pages/layout/footer.xhtml"/>
+	</div>
+</html>
