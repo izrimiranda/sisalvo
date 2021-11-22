@@ -1,3 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.centerHV {
+	height: 10em;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center
+}
+
 .alinhamentoCenter{
 	margin-top: -3em;
 	text-align: center;
@@ -67,7 +79,7 @@
 	margin-bottom: 1em;
 }
 
-.textoLabel{
+.textoLabel {
 	font-size: 1px;
 	font-weight: bold;
 	margin-top: 10em;
