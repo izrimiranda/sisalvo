@@ -17,6 +17,7 @@ import br.com.agencia1615.sisalvo.model.dao.ProfessorDAO;
 import br.com.agencia1615.sisalvo.model.dao.TurmaDAO;
 import br.com.agencia1615.sisalvo.model.dao.UsuarioDAO;
 import br.com.agencia1615.sisalvo.model.entity.Aluno;
+import br.com.agencia1615.sisalvo.model.entity.Atividade;
 import br.com.agencia1615.sisalvo.model.entity.Curso;
 import br.com.agencia1615.sisalvo.model.entity.DiarioAvaliacao;
 import br.com.agencia1615.sisalvo.model.entity.DiarioPresenca;
@@ -61,6 +62,16 @@ public class Main extends BaseDAO {
 		this.salvarUsuarioAdm();
 		this.salvarUsuarioAluno();
 		this.salvarUsuarioProfessor();
+	}
+
+	public void salvarTodos() {
+		this.salvarUsuarios();
+		this.salvarEnderecoTeste();
+		this.salvarAlunoTeste();
+		this.salvarCursoTeste();
+		this.salvarProfessorTeste();
+		this.salvarTurmaTeste();
+		this.salvarDisciplinaTeste();
 	}
 
 	public void salvarDisciplinaEmenta() {
@@ -186,17 +197,22 @@ public class Main extends BaseDAO {
 		disciplina.setTurma(this.getTurmaDAO().buscarTurmaPorNome("Enfermagem 01"));
 		disciplina.setProfessor(this.getProfessorDAO().buscarProfessorTeste());
 
-		disciplina.setListaDiarioAvaliacao(this.getListaDiarioAvaliacao(disciplina));
 		disciplina.setListaDiarioPresenca(this.getListaDiarioPresenca(disciplina));
 
 		this.getEM().persist(disciplina);
 
-		System.out.println("SISALVO LOG | Classe: Main - Método: salvarDisciplina() - Disciplina Salva: "
-				+ disciplina.getNomeDisciplina());
-
 	}
 
-	public List<DiarioAvaliacao> getListaDiarioAvaliacao(Disciplina disciplina) {
+	public List<Atividade> getListaAtividade(Disciplina disciplina) {
+		List<Atividade> listaAtividade = new ArrayList<Atividade>();
+
+		Atividade a = new Atividade();
+
+		a.setDataAtividade(DateUtils.parseToCalendar("10/10/2021", false));
+		a.setNomeAtividade("Prova Avaliativa");
+		a.setNomeUsuarioCad("izrialuno");
+		a.setValorTotal(30.0);
+
 		List<DiarioAvaliacao> listaDiario = new ArrayList<DiarioAvaliacao>();
 		DiarioAvaliacao da = new DiarioAvaliacao();
 
@@ -205,7 +221,47 @@ public class Main extends BaseDAO {
 		da.setObservacao("Prova Avaliativa");
 		da.setValorTotal(30.0);
 		da.setValorObtido(20.0);
-		da.setDisciplina(disciplina);
+
+		listaDiario.add(da);
+
+		a.getListaDiarioAvaliacao().addAll(listaDiario);
+
+		listaAtividade.add(a);
+
+		Atividade a2 = new Atividade();
+
+		a2.setDataAtividade(DateUtils.parseToCalendar("10/10/2021", false));
+		a2.setNomeAtividade("Prova Prática");
+		a2.setNomeUsuarioCad("izrialuno");
+		a2.setValorTotal(50.0);
+
+		List<DiarioAvaliacao> listaDiario2 = new ArrayList<DiarioAvaliacao>();
+		DiarioAvaliacao da2 = new DiarioAvaliacao();
+
+		da2.setAluno(this.getAlunoDAO().buscarAlunoPorLogin("izrialuno"));
+		da2.setDataAtividade(DateUtils.parseToCalendar("01/03/2021", false));
+		da2.setObservacao("Prova Prática");
+		da2.setValorTotal(50.0);
+		da2.setValorObtido(50.0);
+
+		listaDiario2.add(da2);
+
+		a2.getListaDiarioAvaliacao().addAll(listaDiario2);
+
+		listaAtividade.add(a2);
+
+		return listaAtividade;
+	}
+
+	public List<DiarioAvaliacao> getListaDiarioAvaliacao() {
+		List<DiarioAvaliacao> listaDiario = new ArrayList<DiarioAvaliacao>();
+		DiarioAvaliacao da = new DiarioAvaliacao();
+
+		da.setAluno(this.getAlunoDAO().buscarAlunoPorLogin("izrialuno"));
+		da.setDataAtividade(DateUtils.parseToCalendar("10/10/2021", false));
+		da.setObservacao("Prova Avaliativa");
+		da.setValorTotal(30.0);
+		da.setValorObtido(20.0);
 
 		listaDiario.add(da);
 

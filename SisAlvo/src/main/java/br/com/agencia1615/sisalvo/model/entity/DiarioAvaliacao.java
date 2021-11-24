@@ -52,7 +52,7 @@ public class DiarioAvaliacao implements Serializable {
 	private Double valorObtido;
 	private String observacao;
 
-	private Disciplina disciplina;
+	private Atividade atividade;
 
 	private Aluno aluno;
 
@@ -82,15 +82,6 @@ public class DiarioAvaliacao implements Serializable {
 		}
 
 		return data;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "DISCIPLINA_ID")
-	public Disciplina getDisciplina() {
-		if (this.disciplina == null) {
-			this.disciplina = new Disciplina();
-		}
-		return this.disciplina;
 	}
 
 	@Id
@@ -133,10 +124,6 @@ public class DiarioAvaliacao implements Serializable {
 		this.setDataAtividade(calendar);
 	}
 
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
-	}
-
 	public void setExcluido(boolean excluido) {
 		this.excluido = excluido;
 	}
@@ -155,6 +142,19 @@ public class DiarioAvaliacao implements Serializable {
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ATIVIDADE_ID")
+	public Atividade getAtividade() {
+		if (this.atividade == null) {
+			this.atividade = new Atividade();
+		}
+		return this.atividade;
+	}
+
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
 	}
 
 }

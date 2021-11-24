@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html" />
+	<h:outputStylesheet
+		name="my_style.css"
+		library="css" />
+	<link
+		rel="icon"
+		type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/images/iconeAlvo.ico" />
+		<title>Disciplina - Sistema Gestão Alvo</title>
+</h:head>
+	<ui:fragment rendered="#{homeController.menuHeader eq 1}">
+        <ui:include src="/pages/layout/headerPrincipal.xhtml"/>
+   	</ui:fragment>
+    <ui:fragment rendered="#{homeController.menuHeader eq '4'}">
+        <ui:include src="/pages/layout/headerAluno.xhtml"/>
+    </ui:fragment>
+
+	<div class="card">
+	    <h:form id="form">
+		    <div class="pesquisarDisciplina">
+			    <div class="ui-fluid p-formgrid p-grid">
+			    	<div class="p-field p-col-12 p-md-4">
+			    		<div class="textoLabel">
+			                <p:outputLabel style="margin-left: 1em;"
+			               				   for="@next"
+			                			   value="#{msg.mm_keyLabel_turma}"/>
+			    		</div>
+		                <p:selectOneMenu style="width: 30%; margin-left: 5em; margin-top: -3em;"
+		                				 id="group"
+		                				 value="#{visualizarNotasAlunoController.nomeTurma}"
+		                				 effect="fold"
+		                				 process="@this"
+		                				 onchange="window.location.reload();">
+		                	<p:ajax listener="#{visualizarNotasAlunoController.onChangeTurma}"/>
+		                    <f:selectItem itemLabel="#{msg.mm_keyLabel_selecioneTurma}" itemValue=""/>
+		                    <f:selectItems value="#{visualizarNotasAlunoController.nomeTurmas}"/>
+		                </p:selectOneMenu>
+		           	</div>
+			    </div>
+		    </div>
+	        <p:dataTable id="idDisciplina"
+	        			 var="disciplina"
+	        			 value="#{visualizarNotasAlunoController.listaDisciplina}"
+	        			 rowKey="#{disciplina.id}"
+	                     selection="#{visualizarNotasAlunoController.disciplinaSelecionada}">
+                	<p:ajax event="rowSelect" />
+	            <f:facet name="header">
+		            <div class="textoLabel">
+	    	            <p:outputLabel value="#{msg.MPF010}"></p:outputLabel>
+		            </div>
+	            </f:facet>
+	            <!-- Checkbox -->
+	            <p:column selectionMode="single" style="width:16px; text-align:center"/>
+				<!-- Nome Disciplina -->
+	            <p:column headerText="#{msg.CGF015}" style="width:auto; text-align:center" >
+	            	<div class="centralizarHeader">
+	                	<h:outputText value="#{disciplina.nomeDisciplina}" />
+	                </div>
+	            </p:column>
+	            <!-- Sigla -->
+	            <p:column headerText="#{msg.CGF016}" style="width:25px; text-align:center">
+		           	<div class="centralizarHeader">
+		                <h:outputText value="#{disciplina.siglaDisciplina}" />
+		            </div>
+	            </p:column>
+				<!-- Curso -->
+	            <p:column headerText="#{msg.CGF019}" style="width:auto; text-align:center">
+		            <div class="centralizarHeader">
+	    	            <h:outputText value="#{disciplina.curso.nomeCurso}" />
+		            </div>
+	            </p:column>
+	             <!-- Turma -->
+	            <p:column headerText="#{msg.CGF027}" style="width:auto; text-align:center">
+	            	<div class="centralizarHeader">
+	                	<h:outputText value="#{disciplina.turma.nomeTurma}" />
+	                </div>
+	            </p:column>
+	            <!-- Série -->
+	            <p:column headerText="#{msg.CGF020}" style="width:25px; text-align:center">
+	            <div class="centralizarHeader">
+	                <h:outputText value="#{disciplina.serie}" />
+	            </div>
+	            </p:column>
+	            <!-- Professor -->
+	            <p:column headerText="#{msg.CGF017}" style="width:auto; text-align:center">
+	            	<div class="centralizarHeader">
+	                	<h:outputText value="#{disciplina.professor.nomeCompleto}" />
+	                </div>
+	            </p:column>
+	            <!-- Ementa -->
+	            <p:column headerText="#{msg.CGF026}" style="width:auto; text-align:center">
+	            	<div class="centralizarHeader">
+	                	<p:commandButton disabled="#{empty visualizarNotasAlunoController.disciplinaSelecionada.nomeDisciplina}"
+	                				 	 value="Download" styleClass="p-mr-2 p-mb-2"
+	                				 	 action="#{visualizarNotasAlunoController.exportarEmenta}">
+            			<f:setPropertyActionListener value="#{disciplina}" target="#{visualizarNotasAlunoController.disciplinaSelecionada}"/>
+	                	</p:commandButton>
+	                </div>
+	            </p:column>
+	        </p:dataTable>
+
+			<!-- Opção botão Direito -->
+	        <p:contextMenu for="idDisciplina">
+        		<!-- Menu Visualizar Notas -->
+	            <p:menuitem value="#{msg.CGF028}" update="disciplinaDetail" icon="pi pi-search"
+	                        oncomplete="PF('disciplinaDialog').show()"/>
+                <!-- Menu Download Ementa -->
+                <p:menuitem value="#{msg.CGF029}" icon="pi pi-download"
+	                        action="#{visualizarNotasAlunoController.exportarEmenta}"/>
+	        </p:contextMenu>
+
+	        <p:dialog header="#{msg.mm_keyLabel_notas}"
+	        		  widgetVar="disciplinaDialog" modal="true" showEffect="fade"
+	                  hideEffect="fade" resizable="true" rendered="#{not empty visualizarNotasAlunoController.disciplinaSelecionada}"
+	                  responsive="true"
+	                  style="text-align: center; text-size: 100px;"
+	                  width="600">
+	            <p:outputPanel id="disciplinaDetail" style="text-align:center;">
+           			<p:column rendered="#{not empty visualizarNotasAlunoController.disciplinaSelecionada}">
+		                <p:dataTable id="idDisciplinaDialog"
+		        			 var="avaliacao"
+		        			 value="#{visualizarNotasAlunoController.listaDiarioAvaliacao}"
+		        			 rowKey="#{avaliacao.id}" styleClass="centralizarHeader"
+		        			 scrollable="true">
+						<!-- Nome da Disciplina -->
+			            <p:column headerText="#{msg.mm_keyLabel_atividade}" width="10px" style="text-align: center">
+			                <h:outputText value="#{avaliacao.observacao}"/>
+			            </p:column>
+			            <p:column headerText="#{msg.mm_keyLabel_valorTotal}" width="10px" style="text-align: center">
+			                <h:outputText value="#{avaliacao.valorTotal}" styleClass="centralizarHeader"/>
+			            </p:column>
+			            <p:column headerText="#{msg.mm_keyLabel_valorObtido}" width="10px" style="text-align: center">
+			                <h:outputText value="#{avaliacao.valorObtido}" styleClass="centralizarHeader"/>
+			            </p:column>
+			            </p:dataTable>
+		            </p:column>
+	            </p:outputPanel>
+	        </p:dialog>
+	    </h:form>
+	</div>
+	<div class="alinhamentoRodaPe">
+		<ui:include src="/pages/layout/footer.xhtml"/>
+	</div>
+</html>

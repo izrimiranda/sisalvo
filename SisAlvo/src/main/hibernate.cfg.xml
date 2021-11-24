@@ -27,6 +27,7 @@
   <property name="show_sql">false</property>
 
    <mapping class="br.com.agencia1615.sisalvo.model.entity.Aluno" />
+   <mapping class="br.com.agencia1615.sisalvo.model.entity.Atividade" />
    <mapping class="br.com.agencia1615.sisalvo.model.entity.Calendario" />
    <mapping class="br.com.agencia1615.sisalvo.model.entity.Campanha" />
    <mapping class="br.com.agencia1615.sisalvo.model.entity.Curso" />

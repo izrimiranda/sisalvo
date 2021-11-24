@@ -68,12 +68,13 @@ public class Disciplina implements Serializable {
 	private boolean excluido;
 	private Calendar dataCadastro;
 
-	private List<DiarioAvaliacao> listaDiarioAvaliacao;
 	private List<DiarioPresenca> listaDiarioPresenca;
 
 	private Curso curso;
 	private Turma turma;
 	private Professor professor;
+
+	private List<Atividade> listaAtividade;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CURSO_ID")
@@ -106,15 +107,6 @@ public class Disciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Long getId() {
 		return this.id;
-	}
-
-	@OneToMany(targetEntity = DiarioAvaliacao.class, cascade = {
-			CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "disciplina")
-	public List<DiarioAvaliacao> getListaDiarioAvaliacao() {
-		if (this.listaDiarioAvaliacao == null) {
-			this.listaDiarioAvaliacao = new ArrayList<DiarioAvaliacao>();
-		}
-		return this.listaDiarioAvaliacao;
 	}
 
 	@OneToMany(targetEntity = DiarioPresenca.class, cascade = {
@@ -182,10 +174,6 @@ public class Disciplina implements Serializable {
 		this.id = id;
 	}
 
-	public void setListaDiarioAvaliacao(List<DiarioAvaliacao> listaDiarioAvaliacao) {
-		this.listaDiarioAvaliacao = listaDiarioAvaliacao;
-	}
-
 	public void setListaDiarioPresenca(List<DiarioPresenca> listaDiarioPresenca) {
 		this.listaDiarioPresenca = listaDiarioPresenca;
 	}
@@ -245,6 +233,18 @@ public class Disciplina implements Serializable {
 
 	public void setTipoArquivoEmenta(String tipoArquivoEmenta) {
 		this.tipoArquivoEmenta = tipoArquivoEmenta;
+	}
+
+	@OneToMany
+	public List<Atividade> getListaAtividade() {
+		if (this.listaAtividade == null) {
+			this.listaAtividade = new ArrayList<Atividade>();
+		}
+		return this.listaAtividade;
+	}
+
+	public void setListaAtividade(List<Atividade> listaAtividade) {
+		this.listaAtividade = listaAtividade;
 	}
 
 }

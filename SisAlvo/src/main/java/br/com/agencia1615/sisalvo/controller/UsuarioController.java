@@ -60,7 +60,7 @@ public class UsuarioController extends BaseDAO implements Serializable {
 	}
 
 	public String salvarTeste() {
-		new Main().salvarDisciplinaTeste();
+		new Main().salvarAlunoTeste();
 
 		return "";
 	}
